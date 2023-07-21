@@ -1,3 +1,4 @@
+import NaoEncontrado from "../erros/NaoEncontrado.js";
 import livros from "../models/Livro.js";
 
 class LivroController {
@@ -19,7 +20,11 @@ class LivroController {
 
             const livrosResultado = await livros.findById(id);
 
-            res.status(200).json(livrosResultado);
+            if (livrosResultado !== null) {
+                res.status(200).json(livrosResultado);
+            } else {
+                next(new NaoEncontrado("Livro não encontrado."));  
+            }
         } catch (erro) {
             next(erro); 
         }
@@ -31,7 +36,11 @@ class LivroController {
 
             const livrosResultado = await livros.find({"editora": editora});
 
-            res.status(201).send(livrosResultado);
+            if (livrosResultado !== null) {
+                res.status(200).json(livrosResultado);
+            } else {
+                next(new NaoEncontrado("Livro não encontrado."));  
+            }
         } catch (erro) {
             next(erro); 
         }
@@ -53,9 +62,14 @@ class LivroController {
         try {
             const id = req.params.id;
 
-            await livros.findByIdAndUpdate(id, {$set: req.body});
+            const livroResultaddo = await livros.findByIdAndUpdate(id, {$set: req.body});
 
-            res.status(200).send({message: "Livro atualizado com sucesso!"});
+            if (livroResultaddo !== null) {
+                res.status(200).send({message: "Livro atualizado com sucesso!"});
+            } else {
+                next(new NaoEncontrado("Livro não encontrado."));  
+            }
+
         } catch (erro) {
             next(erro); 
         }
@@ -65,9 +79,14 @@ class LivroController {
         try {
             const id = req.params.id;
             
-            await livros.findByIdAndDelete(id);
+            const livroResultaddo = await livros.findByIdAndDelete(id);
 
-            res.status(200).send({message: "Livro excluido com sucesso!"});
+            if (livroResultaddo !== null) {
+                res.status(200).send({message: "Livro excluido com sucesso!"});
+            } else {
+                next(new NaoEncontrado("Livro não encontrado."));  
+            }
+
         } catch (erro) {
             next(erro); 
         }
