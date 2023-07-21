@@ -1,8 +1,8 @@
-import mongoose from "mongoose"
+import mongoose from "mongoose";
 
-mongoose.set('strictQuery', false)
-mongoose.connect(process.env.STRING_CONEXAO_DB)
+mongoose.set("strictQuery", false);
+mongoose.connect(process.env.STRING_CONEXAO_DB);
 
-let db = mongoose.connection
+let db = mongoose.connection;
 
-export default db
+export default db;
