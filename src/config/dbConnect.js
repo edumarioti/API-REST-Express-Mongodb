@@ -1,7 +1,7 @@
 import mongoose from "mongoose"
 
 mongoose.set('strictQuery', false)
-mongoose.connect("mongodb+srv://alura:alura123@alura.kzhckai.mongodb.net/alura-node")
+mongoose.connect(process.env.STRING_CONEXAO_DB)
 
 let db = mongoose.connection
 
