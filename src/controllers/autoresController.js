@@ -13,7 +13,7 @@ class AutorController {
         
         autores.findById(id,(err, autor ) => {
             if (err) {
-                res.status(400).send({message: `${err.message} - Id do autor não localizado`})
+                res.status(400).send({message: `Id do autor não localizado  \n ${err.message}`})
             } else {
                 res.status(200).send(autor )
             }           
@@ -27,7 +27,7 @@ class AutorController {
 
         autor.save((err) => {
             if (err) {
-                res.status(500).send({message: `${err.message} - Falha ao cadastrar autor `})
+                res.status(500).send({message: `Falha ao cadastrar autor \n ${err.message}`})
             } else {
                 res.status(201).send(autor .toJSON())
             }
@@ -39,7 +39,7 @@ class AutorController {
         
         autores.findByIdAndUpdate(id, {$set: req.body}, (err) => {
             if (err) {
-                res.status(500).send({message: `${err.message} - Falha ao atualizar o autor`})
+                res.status(500).send({message: `Falha ao atualizar o autor \n ${err.message}`})
             } else {
                 res.status(200).send({message: `Autor atualizado com sucesso!`})
             }
@@ -52,7 +52,7 @@ class AutorController {
 
         autores.findByIdAndDelete(id, (err) => {
             if (err) {
-                res.status(500).send({message: `${err.message} - Falha ao excluir o autor`})
+                res.status(500).send({message: `Falha ao excluir o autor \n ${err.message}`})
             } else {
                 res.status(200).send({message: `Autor excluido com sucesso!`})
             }
